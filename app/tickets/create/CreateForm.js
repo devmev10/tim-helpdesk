@@ -11,6 +11,24 @@ export default function CreateForm() {
   const [priority, setPriority] = useState("low");
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const ticket = {
+      title,
+      body,
+      priority,
+      user_email: "tim@jim.com",
+    };
+
+    const res = await fetch("http://localhost:4000/tickets", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(ticket),
+    });
+  };
+
   return (
     <form className="w-1/2">
       <label>
@@ -40,7 +58,7 @@ export default function CreateForm() {
       </label>
       <button className="btn-primary" disabled={isLoading}>
         {isLoading && <span>Adding...</span>}
-        {isLoading && <span>Add Ticket</span>}
+        {!isLoading && <span>Add Ticket</span>}
       </button>
     </form>
   );
