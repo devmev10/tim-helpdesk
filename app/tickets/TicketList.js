@@ -1,8 +1,7 @@
 async function getTickets() {
   const res = await fetch("http://localhost:4000/tickets");
-  console.log("this is Res.json", res.json());
 
-  //   return res.json();
+  return res.json();
 }
 
 export default async function TicketList() {
