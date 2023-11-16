@@ -27,10 +27,15 @@ export default function CreateForm() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(ticket),
     });
+
+    if (res.status === 201) {
+      router.refresh();
+      router.push("/tickets");
+    }
   };
 
   return (
-    <form className="w-1/2">
+    <form onSubmit={handleSubmit} className="w-1/2">
       <label>
         <span>Title:</span>
         <input
